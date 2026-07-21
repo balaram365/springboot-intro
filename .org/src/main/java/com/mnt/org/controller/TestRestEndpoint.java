@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestRestEndpoint {
 
  //private FootBallCoach footBallCoach;
- @Qualifier("tennisCoach")
- @Autowired
+ //@Qualifier("tennisCoach")
+ //@Autowired
  private Coach myCoach;
+ private Coach myCoachCopy;
 
  //private TennisCoach tennisCoach;
 
-/* @Autowired
-    public TestRestEndpoint (@Qualifier("tennisCoach") Coach theCoach) {
+//Highe
+    public TestRestEndpoint (@Qualifier("tennisCoach") Coach theCoach,
+                             @Qualifier("tennisCoach") Coach myCoachCopy) {
         this.myCoach =theCoach ;
-    }*/
+        this.myCoachCopy=myCoachCopy;
+    }
 
 
 
@@ -33,10 +36,21 @@ public class TestRestEndpoint {
 
     @GetMapping("/hello")
     public String testApp(){
-        log.info("object instance of mycoah is " + myCoach.getClass());
+        log.info("object instance of mycoah is " + myCoach.getClass().getSimpleName());
+        log.info("object instance of mycoahCopy is " + myCoachCopy.getClass().getSimpleName());
+
         String test =myCoach.getDailyWorkOutInfo();
         //String output=footBallCoach.getDailyWorkOutInfo();
        // String tenisOutPut=tennisCoach.getDailyWorkOutInfo();
         return test;//+"/n"+tenisOutPut;
+    }
+
+    @GetMapping("/check")
+    public String check(){
+        log.info("object instance of mycoah is " + myCoach.getClass().getSimpleName());
+        log.info("object instance of mycoahCopy is " + myCoachCopy.getClass().getSimpleName());
+
+        return "comparing beans : myCoah == myCoahCopy " +
+                (myCoach==myCoachCopy);
     }
 }

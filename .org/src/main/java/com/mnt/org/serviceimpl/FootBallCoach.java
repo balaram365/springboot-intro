@@ -1,6 +1,7 @@
 package com.mnt.org.serviceimpl;
 
 import com.mnt.org.serviceinterface.Coach;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
