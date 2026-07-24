@@ -1,6 +1,8 @@
 package com.example.demo;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,18 +34,34 @@ public class NewApplication {
 		@Bean
 		public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 			return runner->{
-				createStudent(studentDAO);
+				//createStudent(studentDAO);
+				//findStudent(studentDAO,2);
+				findStudentAll(studentDAO);
 			};
 			
 		}
 		private void createStudent(StudentDAO studentDAO) {
 			// TODO Auto-generated method stub
 			Student details = new Student("Balaram","krishna","balaram@gamil.com");
-			studentDAO.save(details);
-			
+			studentDAO.save(details);	
 			System.out.println("save id "+details.getId());
+			
+		
 		}
 		
-	}
+		private void findStudent(StudentDAO studentDAO,int id) {
+			
+			Student output = studentDAO.findById(id);
 
+		       System.out.println("details "+output.getId());
+		       System.out.println("details "+output.getFirstName());
+		}
+		
+		private void findStudentAll(StudentDAO studentDAO) {
+
+	        //Student output = studentDAO.findById(id);
+		        List<Student> results= studentDAO.findAll();
+		
+		}
+}
 
