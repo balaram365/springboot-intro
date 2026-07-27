@@ -37,6 +37,8 @@ public class NewApplication {
 				//createStudent(studentDAO);
 				//findStudent(studentDAO,2);
 				findStudentAll(studentDAO);
+			//	deleteStudent(studentDAO);
+				//updateStudent(studentDAO);
 			};
 			
 		}
@@ -60,8 +62,29 @@ public class NewApplication {
 		private void findStudentAll(StudentDAO studentDAO) {
 
 	        //Student output = studentDAO.findById(id);
-		        List<Student> results= studentDAO.findAll();
+		        List<Student> results= studentDAO.findAll();	
+		        System.out.println(results);
+		}
+		private void deleteStudent(StudentDAO studentDAO) {
+			  int studentid=3;
+			  studentDAO.delete(studentid);
+			  System.out.println("Deleted student with id: "+studentid);
+		  }
 		
+		private void updateStudent(StudentDAO studentDAO) {
+
+		    // Fetch student with id = 1
+		    Student student = studentDAO.findById(4);
+
+		    // Update values
+		    student.setFirstName("Rahul");
+		    student.setLastName("Sharma");
+		    student.setEmail("rahul@gmail.com");
+
+		    // Save changes
+		    studentDAO.update(student);
+
+		    System.out.println("Student updated successfully.");
 		}
 }
 
