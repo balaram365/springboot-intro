@@ -40,13 +40,7 @@ public class StudentImpl implements StudentDAO{
 	public List<Student> findAll() {
 		// TODO Auto-generated method stub
 		TypedQuery<Student> resultList=entityManager.createQuery("From Student",Student.class);
-//		Query resultQuery=entityManager.createQuery("select s.id, s.firstName, s.lastName,s.email from Student s");
-//		
-//		List<Object[]> result = resultQuery.getResultList();
-//		List<List<Object>> values = result.stream()
-//		        .map(Arrays::asList)
-//		        .toList();
-//
+		
 //		System.out.println(values);
 		return resultList.getResultList();
 	}
@@ -72,3 +66,11 @@ public class StudentImpl implements StudentDAO{
 		
 	}
 	
+
+
+
+//
+//List<Object[]> result = resultQuery.getResultList();
+//List<List<Object>> values = result.stream()
+//        .map(Arrays::asList)
+//        .toList();

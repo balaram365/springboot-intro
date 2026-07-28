@@ -12,7 +12,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 
 import com.example.demo.controller.TestRestEndPoint;
+import com.example.demo.dao.CourseDAO;
 import com.example.demo.dao.StudentDAO;
+import com.example.demo.entity.Course;
 import com.example.demo.entity.Student;
 
 @SpringBootApplication
@@ -23,7 +25,7 @@ public class NewApplication {
 	public static void main(String[] args) {
 		 
 		
-//		
+		
 //		 String test = testRestEndPoint.testApp();
 //		 System.out.println(test);
 		SpringApplication.run(NewApplication.class, args);
@@ -32,13 +34,17 @@ public class NewApplication {
 //		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 	}
 		@Bean
-		public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+		public CommandLineRunner commandLineRunner(StudentDAO studentDAO ,CourseDAO courseDAO) {
 			return runner->{
 				//createStudent(studentDAO);
 				//findStudent(studentDAO,2);
-				findStudentAll(studentDAO);
+				//findStudentAll(studentDAO);
 			//	deleteStudent(studentDAO);
 				//updateStudent(studentDAO);
+				displayStudentCourses(courseDAO);
+				
+				
+				
 			};
 			
 		}
@@ -85,6 +91,24 @@ public class NewApplication {
 		    studentDAO.update(student);
 
 		    System.out.println("Student updated successfully.");
+		       
+		}
+		
+		private void displayStudentCourses(CourseDAO courseDAO) {
+			  
+		    List<Student> students = courseDAO.findStudentWithCourses();
+
+		    for (Student student : students) {
+
+		        System.out.println("Student : " + student.getFirstName());
+
+		        for (Course course : student.getCourses()) {
+
+		            System.out.println("Course : " + course.getCourseName());
+		        }
+
+		        System.out.println("-------------------");
+		    }
 		}
 }
 
