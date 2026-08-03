@@ -9,6 +9,7 @@ import com.example.demo.dao.StudentDAO;
 import com.example.demo.entity.Student;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -16,12 +17,13 @@ import jakarta.transaction.Transactional;
 @Repository
 public class StudentImpl implements StudentDAO{
 
+	@PersistenceContext(unitName = "student")
 	private EntityManager entityManager;
 	
-	@Autowired  //constructor injection
-	public StudentImpl(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
+//	@Autowired  //constructor injection
+//	public StudentImpl(EntityManager entityManager) {
+//		this.entityManager = entityManager;
+//	}
 	
 	@Transactional //springframework
 	@Override

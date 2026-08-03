@@ -16,6 +16,8 @@ import com.example.demo.dao.CourseDAO;
 import com.example.demo.dao.StudentDAO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Student;
+import com.example.demo.library.dao.LibraryDAO;
+import com.example.demo.library.entity.Library;
 
 @SpringBootApplication
 public class NewApplication {
@@ -34,20 +36,25 @@ public class NewApplication {
 //		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 	}
 		@Bean
-		public CommandLineRunner commandLineRunner(StudentDAO studentDAO ,CourseDAO courseDAO) {
+		public CommandLineRunner commandLineRunner(StudentDAO studentDAO ,CourseDAO courseDAO,LibraryDAO libraryDAO) {
 			return runner->{
 				//createStudent(studentDAO);
 				//findStudent(studentDAO,2);
 				//findStudentAll(studentDAO);
 			//	deleteStudent(studentDAO);
 				//updateStudent(studentDAO);
-				displayStudentCourses(courseDAO);
-				
-				
+				//displayStudentCourses(courseDAO);
+				displayBooks(libraryDAO);
+							
 				
 			};
 			
 		}
+		private void displayBooks(LibraryDAO libraryDAO) {
+			List<Library> books = libraryDAO.findAll();
+			System.out.println(books);
+		}
+		
 		private void createStudent(StudentDAO studentDAO) {
 			// TODO Auto-generated method stub
 			Student details = new Student("Balaram","krishna","balaram@gamil.com");
