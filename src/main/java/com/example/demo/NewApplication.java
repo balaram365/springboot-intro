@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,13 @@ import org.springframework.context.annotation.Bean;
 import com.example.demo.controller.TestRestEndPoint;
 import com.example.demo.dao.CourseDAO;
 import com.example.demo.dao.StudentDAO;
+import com.example.demo.dao.UserRepository;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Student;
 import com.example.demo.library.dao.LibraryDAO;
 import com.example.demo.library.entity.Library;
+
+
 
 @SpringBootApplication
 public class NewApplication {
@@ -26,7 +28,7 @@ public class NewApplication {
 //	static TestRestEndPoint testRestEndPoint;
 	public static void main(String[] args) {
 		 
-		
+
 		
 //		 String test = testRestEndPoint.testApp();
 //		 System.out.println(test);
@@ -36,7 +38,7 @@ public class NewApplication {
 //		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 	}
 		@Bean
-		public CommandLineRunner commandLineRunner(StudentDAO studentDAO ,CourseDAO courseDAO,LibraryDAO libraryDAO) {
+		public CommandLineRunner commandLineRunner(StudentDAO studentDAO ,CourseDAO courseDAO,LibraryDAO libraryDAO, UserRepository repository) {
 			return runner->{
 				//createStudent(studentDAO);
 				//findStudent(studentDAO,2);
@@ -44,11 +46,17 @@ public class NewApplication {
 			//	deleteStudent(studentDAO);
 				//updateStudent(studentDAO);
 				//displayStudentCourses(courseDAO);
-				displayBooks(libraryDAO);
-							
-				
+				//displayBooks(libraryDAO);
+				crudDisplay(repository);
+								
 			};
 			
+		}
+		
+		private void crudDisplay(UserRepository repository) {
+			 System.out.println("All Customers");
+		        repository.findAll().forEach(System.out::println);
+		        
 		}
 		private void displayBooks(LibraryDAO libraryDAO) {
 			List<Library> books = libraryDAO.findAll();
@@ -61,7 +69,6 @@ public class NewApplication {
 			studentDAO.save(details);	
 			System.out.println("save id "+details.getId());
 			
-		
 		}
 		
 		private void findStudent(StudentDAO studentDAO,int id) {

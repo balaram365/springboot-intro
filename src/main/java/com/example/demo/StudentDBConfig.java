@@ -42,6 +42,7 @@ public class StudentDBConfig {
 	                .packages("com.example.demo.entity")
 	                .persistenceUnit("student")
 	                .build();
+	        
 	    }
 	 
 	 @Primary
